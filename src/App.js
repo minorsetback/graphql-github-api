@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './components/List';
+import React, { useState } from 'react';
 
 function App() {
+  const [link, setLink] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <input
+        className='link'
+        type="text"
+        name='input1'
+        placeholder='Link GitHub Repo'
+        value={link}
+        onChange={(event) => setLink(event.target.value)}
+      />
+      {link.split('/').length === 5 &&
+        (<List link={link} />)
+      }
+
+
     </div>
-  );
+  )
+
 }
 
 export default App;
