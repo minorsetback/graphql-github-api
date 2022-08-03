@@ -1,42 +1,8 @@
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import Accordion from 'react-bootstrap/Accordion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { GET_ISSUES, ADD_COMMENT } from "./queries/queries";
 
-const GET_ISSUES = gql`
-    query($owner: String!, $name: String!) { 
-        repository(owner: $owner, name: $name) { 
-            issues(first: 100, states:OPEN) {
-                nodes {
-                    author {
-                        login
-                    }
-                    body
-                    comments(first: 100) {
-                        nodes {
-                        body
-                        author {
-                            ... on User {
-                            login
-                            }
-                        }
-                        }
-                    }
-                    id
-                }
-                
-            }
-        }
-    }`
-
-const ADD_COMMENT = gql`
-    mutation ($text: String!, $id: ID!){
-        addComment(input:{ 
-          subjectId: $id,
-          body:$text
-        }) {
-          clientMutationId
-        }
-    }`
 
 function List({ link }) {
     const repo = link.split('/')
