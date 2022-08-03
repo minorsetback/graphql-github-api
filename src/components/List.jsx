@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const GET_ISSUES = gql`
     query($owner: String!, $name: String!) { 
         repository(owner: $owner, name: $name) { 
-            issues(first: 100, states:CLOSED) {
+            issues(first: 100, states:OPEN) {
                 nodes {
                     author {
                         login
